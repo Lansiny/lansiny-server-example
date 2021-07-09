@@ -1,0 +1,22 @@
+{
+  "restartable": "rs",
+  "ignore": [
+    ".git",
+    "node_modules/**/node_modules",
+    "*.md",
+    "public/*",
+    "test/*",
+    "logs/*",
+    "test/*"
+  ],
+  "verbose": false,
+  "execMap": {
+    "js": "node --harmony"
+  },
+  "env": {
+    "NODE_ENV": "dev",
+    "PORT": 80
+  },
+  "ext": "js json",
+  "delay": "1000"
+}
