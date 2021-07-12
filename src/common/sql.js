@@ -3,13 +3,11 @@
 const fs = require('fs')
 
 const sqlLoader = {
-  path: '',
   sqlList: [],
   async init(query, path) {
     try {
-      this.path = path
-      this.listDir(this.path)
-      this.run(query)
+      this.listDir(path)
+      await this.run(query)
     } catch (error) {
       console.log(error)
     }
@@ -28,11 +26,9 @@ const sqlLoader = {
     }
   },
   async run(query) {
-    this.sqlList.forEach(async sql => {
-      if (sql) {
-        await query(sql, [])
-      }
-    })
+    for (const sql of this.sqlList) {
+      await query(sql, [])
+    }
   }
 }
 

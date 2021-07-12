@@ -3,6 +3,9 @@
 const mysql = require('mysql2')
 const config = require('config')
 
+const path = require('path')
+
+const sqlLoader = require('../common/sql')
 const mysqlType = require('../../config/constant').database.mysqlType
 const pool = mysql.createPool({ ...config.mysql[mysqlType] })
 
@@ -30,18 +33,28 @@ const query = function (
   })
 }
 
-// const heartbeat = async () => {
-//   try {
-//     await query('select 1')
-//   } catch (err) {
-//     console.log(err)
-//   }
-//   setTimeout(heartbeat, 60 * 1000 * 10)
-// }
+async function initDB() {
+  try {
+    await sqlLoader.init(query, path.join(__dirname, './sql/table/'))
+    await sqlLoader.init(query, path.join(__dirname, './sql/initial/'))
+  } catch (err) {
+    console.log(err)
+  }
+}
 
-// heartbeat()
+async function heartbeat() {
+  try {
+    await query('select 1')
+  } catch (err) {
+    console.log(err)
+  }
+  setTimeout(heartbeat, 60 * 1000 * 10)
+}
+
+heartbeat()
 
 module.exports = {
+  initDB,
   pool,
   query
 }

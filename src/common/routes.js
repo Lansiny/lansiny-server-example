@@ -4,17 +4,17 @@
 const fs = require('fs')
 
 const routes = {
-  path: '',
-  app: null,
   modules: [],
-  init: function (app, path) {
-    if (!app) {
-      return false
+  init: async function (app, path) {
+    try {
+      if (!app) {
+        return false
+      }
+      this.listDir(path)
+      this.load(app)
+    } catch (err) {
+      console.log(err)
     }
-    this.app = app
-    this.path = path
-    this.listDir(this.path)
-    this.load(this.app)
   },
   listDir: function (dir) {
     const routerFileList = fs.readdirSync(dir, 'utf-8')
@@ -30,11 +30,11 @@ const routes = {
     }
   },
   load: function (app) {
-    this.modules.forEach((module) => {
+    for (const module of this.modules) {
       if (module && module.routes) {
         app.use(module.middleware())
       }
-    })
+    }
   }
 }
 
