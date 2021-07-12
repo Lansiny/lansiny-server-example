@@ -30,16 +30,16 @@ const query = function (
   })
 }
 
-const heartbeat = async () => {
-  try {
-    await query('select 1')
-  } catch (err) {
-    console.log(err)
-  }
-  setTimeout(heartbeat, 60 * 1000 * 10)
-}
+// const heartbeat = async () => {
+//   try {
+//     await query('select 1')
+//   } catch (err) {
+//     console.log(err)
+//   }
+//   setTimeout(heartbeat, 60 * 1000 * 10)
+// }
 
-heartbeat()
+// heartbeat()
 
 module.exports = {
   pool,

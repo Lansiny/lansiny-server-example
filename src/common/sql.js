@@ -6,16 +6,13 @@ const sqlLoader = {
   path: '',
   sqlList: [],
   async init(query, path) {
-    return new Promise((resolve, reject) => {
-      try {
-        this.path = path
-        this.listDir(this.path)
-        this.run(query)
-        resolve()
-      } catch (err) {
-        reject(err)
-      }
-    })
+    try {
+      this.path = path
+      this.listDir(this.path)
+      this.run(query)
+    } catch (error) {
+      console.log(error)
+    }
   },
   listDir(dir) {
     const sqlFileList = fs.readdirSync(dir, 'utf-8')
