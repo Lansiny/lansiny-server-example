@@ -7,8 +7,13 @@ module.exports = {
   name: '后端模板演示项目',
   smtpEmail: '"Lautsky" <lautsky@qq.com>',
   adminInitPassword: 'admin',
-  fileMaxSize: 100 * 1024 * 1024,
-  jwtUnlessPath: [/./],
-  mysqlType: 'test',
-  redisType: 'test'
+  bodyParser: {
+    maxFieldsSize: 100 * 1024 * 1024,
+    jsonLimit: '2mb',
+    formLimit: '2mb'
+  },
+  database: {
+    mysqlType: 'test',
+    redisType: 'test'
+  }
 }

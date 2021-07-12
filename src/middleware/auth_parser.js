@@ -11,14 +11,9 @@ module.exports = function () {
       if (!(auth.user && auth.user.user_id)) {
         auth.user = null
       }
-      ctx.auth = { ...auth, isExpire, authSecretKey }
+      ctx.state.auth = { ...auth, isExpire, authSecretKey }
     } else {
-      ctx.auth = null
-    }
-    ctx.params = {
-      ...ctx.request.query,
-      ...ctx.request.params,
-      ...ctx.request.body
+      ctx.state.auth = null
     }
     await next()
   }

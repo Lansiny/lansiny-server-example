@@ -9,6 +9,7 @@ const sendmailer = require('../common/sendmailer')
 const appName = require('../../config/constant').name
 
 const MD5 = require('md5')
+const moment = require('moment')
 
 class Email extends Controller {
   // ----------------------------------------------------------------
@@ -18,8 +19,8 @@ class Email extends Controller {
   // 邮箱验证
   async verifyEmail(ctx, next) {
     try {
-      const auth = ctx.auth
-      const { email } = ctx.params
+      const auth = ctx.state.auth
+      const { email } = ctx.state.params
       const verificationCode = Math.random().toString().substring(2, 8)
       if (process.env.NODE_ENV === 'production') {
         await sendmailer({
@@ -33,6 +34,7 @@ class Email extends Controller {
         verificationCode: MD5(verificationCode)
       })
       auth.isVerifyEmail = true
+      auth.date = moment(Date.now()).format('YYYY-MM-DD HH:mm:ss:SSS')
       const token = await signToken({ auth, timeout: '7d' })
       return await Response.success(ctx, {
         msg: '邮箱验证码已发送',
@@ -51,9 +53,10 @@ class Email extends Controller {
   // 检查是否进行邮箱验证
   async checkIsVerifyEmail(ctx, next) {
     try {
-      const isNext = ctx.auth.isVerifyEmail
-      if (isNext) return next()
-      else {
+      const isNext = ctx.state.auth.isVerifyEmail
+      if (isNext) {
+        return next()
+      } else {
         return Response.failure(ctx, EmailException.EMAIL_NOT_VERIFY)
       }
     } catch (err) {
@@ -64,7 +67,7 @@ class Email extends Controller {
   // 检查邮箱验证码是否正确
   async checkVerificationCode(ctx, next) {
     try {
-      const params = ctx.params
+      const params = ctx.state.params
       const cache = await EmailCache.getVerificationCode(params)
       if (cache === null || !cache.verificationCode) {
         return Response.failure(ctx, EmailException.EMAIL_NOT_VERIFY)

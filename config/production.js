@@ -3,7 +3,7 @@
 
 module.exports = {
   mysql: {
-    remote: {
+    test: {
       host: '127.0.0.1',
       port: 3306,
       user: 'root',
@@ -13,7 +13,7 @@ module.exports = {
     }
   },
   redis: {
-    remote: {
+    test: {
       host: '127.0.0.1',
       port: 6379,
       family: 4, // 4 (IPv4) or 6 (IPv6)

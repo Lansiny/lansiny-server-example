@@ -7,7 +7,8 @@ const helmet = require('koa-helmet')
 
 const cors = require('./cors')
 const bodyParser = require('./body_parser')
-const paramsParser = require('./params_parser')
+const paramsMerger = require('./params_merger')
+const authParser = require('./auth_parser')
 const debug = require('./debug')
 
 const routes = require('../common/routes')
@@ -17,7 +18,8 @@ const middleware = (app) => {
   app.use(helmet())
   app.use(cors())
   app.use(bodyParser(app))
-  app.use(paramsParser())
+  app.use(authParser())
+  app.use(paramsMerger())
   if (process.env.NODE_ENV === 'dev') app.use(debug())
   routes.init(app, path.join(__dirname, '..', '/router/'))
 }

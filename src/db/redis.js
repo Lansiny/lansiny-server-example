@@ -3,7 +3,7 @@
 
 const Redis = require('ioredis')
 const config = require('config')
-const redisType = require('../../config/constant').redisType
+const redisType = require('../../config/constant').database.redisType
 const store = new Redis({ ...config.redis[redisType] })
 
 function set(key, val, timeout = 60 * 60) {

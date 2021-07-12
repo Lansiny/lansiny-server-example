@@ -5,11 +5,13 @@ class Test extends Controller {
   async getToken(ctx, next) {
     try {
       // const body = Controller.getParams(ctx)
-      const auth = ctx.auth
+      const auth = ctx.state.auth
+      console.log(ctx.state)
       const res = {
         // ...body,
+        // keys: ctx.keys,
         auth,
-        ...ctx.params
+        ...ctx.state.params
       }
       return Response.success(ctx, {
         msg: '响应成功',

@@ -8,7 +8,7 @@ module.exports = {
       user: 'root',
       password: '19971017',
       database: 'lansiny-server-example',
-      connectionLimit: 5
+      connectionLimit: 1
     }
   },
   redis: {

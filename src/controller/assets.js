@@ -42,7 +42,7 @@ class Assets extends Controller {
 
   async modify(ctx, next) {
     try {
-      const params = ctx.params
+      const params = ctx.state.params
       const res = await AssetsService.modify(params)
       return Response.success(ctx, {
         msg: '修改成功',
@@ -55,7 +55,7 @@ class Assets extends Controller {
 
   async del(ctx, next) {
     try {
-      const params = ctx.params
+      const params = ctx.state.params
       const res = await AssetsService.del(params)
       return Response.success(ctx, {
         msg: '删除成功',
@@ -68,7 +68,7 @@ class Assets extends Controller {
 
   async getList(ctx, next) {
     try {
-      const params = ctx.params
+      const params = ctx.state.params
       const res = await AssetsService.getList(params)
       return Response.success(ctx, {
         msg: '查询成功',
@@ -85,11 +85,12 @@ class Assets extends Controller {
 
   async checkIsExist(ctx, next) {
     try {
-      const params = ctx.params
+      const params = ctx.state.params
       const isExistResult = await AssetsService.getIsExist(params)
       const isNext = isExistResult && isExistResult.length > 0
-      if (isNext) return next()
-      else {
+      if (isNext) {
+        return next()
+      } else {
         return Response.failure(ctx, AssetsException.ASSETS_NOT_EXIST)
       }
     } catch (err) {

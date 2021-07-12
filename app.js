@@ -1,4 +1,6 @@
 
+// 开发环境下的单进程启动文件
+
 // 修改进程名
 process.title = require('./config/constant').app
 

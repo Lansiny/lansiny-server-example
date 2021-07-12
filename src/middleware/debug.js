@@ -3,8 +3,8 @@
 
 module.exports = function () {
   return async (ctx, next) => {
-    // console.log('-----debug middleware-----')
-
+    // console.log(ctx.auth)
+    // console.log(ctx.params)
     await next()
   }
 }

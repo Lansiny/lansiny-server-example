@@ -1,10 +1,9 @@
 'use strict'
 
-const path = require('path')
 const mysql = require('mysql2')
 const config = require('config')
-const sqlLoader = require('../common/sql')
-const mysqlType = require('../../config/constant').mysqlType
+
+const mysqlType = require('../../config/constant').database.mysqlType
 const pool = mysql.createPool({ ...config.mysql[mysqlType] })
 
 const query = function (
@@ -40,17 +39,6 @@ const heartbeat = async () => {
   setTimeout(heartbeat, 60 * 1000 * 10)
 }
 
-const initAdmin = async () => {
-  try {
-    await sqlLoader.init(query, path.join(__dirname, '/sql/table/'))
-    await sqlLoader.init(query, path.join(__dirname, '/sql/initial/'))
-    // await query('select 1')
-  } catch (err) {
-    console.log(err)
-  }
-}
-
-initAdmin()
 heartbeat()
 
 module.exports = {
