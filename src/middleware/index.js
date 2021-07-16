@@ -2,7 +2,7 @@
 'use strict'
 
 const path = require('path')
-const logger = require('koa-logger')
+const httpLogger = require('koa-logger')
 const helmet = require('koa-helmet')
 
 const cors = require('./cors')
@@ -14,7 +14,7 @@ const debug = require('./debug')
 const routes = require('../common/routes')
 
 const middleware = (app) => {
-  if (process.env.NODE_ENV === 'dev') app.use(logger())
+  if (process.env.NODE_ENV === 'dev') app.use(httpLogger())
   app.use(helmet())
   app.use(cors())
   app.use(bodyParser(app))

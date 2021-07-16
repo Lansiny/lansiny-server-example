@@ -50,9 +50,9 @@ class Service {
   static getHHmmss(timestamp = 0) {
     const tempTime = moment.duration(timestamp)
     return `${tempTime.hours() <= 10 ? '0' + tempTime.hours() : tempTime.hours()
-      }:${tempTime.minutes() <= 10 ? '0' + tempTime.minutes() : tempTime.minutes()
-      }:${tempTime.seconds() <= 10 ? '0' + tempTime.seconds() : tempTime.seconds()
-      }`
+    }:${tempTime.minutes() <= 10 ? '0' + tempTime.minutes() : tempTime.minutes()
+    }:${tempTime.seconds() <= 10 ? '0' + tempTime.seconds() : tempTime.seconds()
+    }`
   }
 
   /**

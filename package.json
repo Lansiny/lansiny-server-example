@@ -11,13 +11,13 @@
     "initDB": "cross-env NODE_ENV=production node ./init_db.js",
     "dev": "./node_modules/.bin/nodemon ./bin/www",
     "start": "cross-env NODE_ENV=production node ./bin/www",
-    "lint": "eslint . --fix"
+    "lint": "eslint . --fix",
+    "lint:init": "eslint --init"
   },
   "dependencies": {
     "config": "^3.3.2",
     "debug": "^4.3.2",
     "fs-extra": "^10.0.0",
-    "got": "^11.8.2",
     "ioredis": "^4.19.2",
     "jsonwebtoken": "^8.5.1",
     "koa": "^2.13.0",
@@ -31,21 +31,23 @@
     "md5": "^2.3.0",
     "moment": "^2.29.1",
     "mysql2": "^2.2.5",
+    "node-schedule": "^2.0.0",
     "nodemailer": "^6.4.16",
     "superagent": "^6.1.0"
   },
   "devDependencies": {
+    "@types/typescript": "^2.0.0",
     "ava": "^3.15.0",
     "cross-env": "^7.0.3",
     "eslint": "^7.30.0",
     "eslint-config-standard": "^16.0.1",
-    "eslint-plugin-html": "^6.1.1",
-    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-standard": "^5.0.0",
     "husky": "^7.0.1",
     "nodemon": "^2.0.12",
-    "single-line-log": "^1.1.2"
+    "single-line-log": "^1.1.2",
+    "typescript": "^4.3.5"
   }
 }
