@@ -17,7 +17,7 @@ module.exports = {
     'space-before-function-paren': ['off'],
     'array-callback-return': ['off'],
     'no-unused-vars': ['warn'],
-    indent: ['error', 2],
+    // 'indent': ['error', 2],
     'linebreak-style': ['error', 'windows'],
     quotes: ['error', 'single'],
     semi: ['error', 'never'],
